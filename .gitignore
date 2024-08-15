@@ -6,3 +6,5 @@ spider
 
 # secret folder
 secrets
+
+test*.json
