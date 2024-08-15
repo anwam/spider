@@ -1,0 +1,8 @@
+# binary
+spider
+
+# env
+*.env
+
+# secret folder
+secrets
