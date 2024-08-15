@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/anwam/spider/cmd/crawl"
 	"github.com/spf13/cobra"
 )
 
@@ -24,8 +25,8 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVarP(&url, "url", "u", "", "URL to crawl")
 	rootCmd.PersistentFlags().StringArrayVarP(&urls, "urls", "U", []string{}, "URLs to crawl")
-	rootCmd.AddCommand(crawlCmd)
-	rootCmd.AddCommand(bulkCrawlCmd)
+	rootCmd.AddCommand(crawl.CrawlCmd)
+	rootCmd.AddCommand(crawl.BulkCrawlCmd)
 }
 
 func initConfig() {

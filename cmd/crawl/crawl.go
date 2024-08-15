@@ -1,4 +1,4 @@
-package cmd
+package crawl
 
 import (
 	"fmt"
@@ -10,12 +10,17 @@ import (
 
 var (
 	c        *colly.Collector
-	crawlCmd = &cobra.Command{
+	CrawlCmd = &cobra.Command{
 		Use:   "crawl",
 		Short: "Crawl a website",
 		Long:  "Crawl a website and generate JSON file",
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("Start crawling...")
+			url, err := cmd.Flags().GetString("url")
+			if err != nil {
+				fmt.Println("Error getting URL flag")
+				return
+			}
 			if url == "" {
 				fmt.Println("URL is required. use --url or -u flag")
 				return
@@ -33,11 +38,16 @@ var (
 		},
 	}
 
-	bulkCrawlCmd = &cobra.Command{
+	BulkCrawlCmd = &cobra.Command{
 		Use:   "bulk-crawl",
 		Short: "Bulk crawl websites",
 		Long:  "Bulk crawl websites and generate JSON file",
 		Run: func(cmd *cobra.Command, args []string) {
+			urls, err := cmd.Flags().GetStringArray("urls")
+			if err != nil {
+				fmt.Println("Error getting URLs flag")
+				return
+			}
 			if len(urls) == 0 {
 				fmt.Println("URLs are required. use --urls or -U flag")
 				return
