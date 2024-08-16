@@ -34,7 +34,9 @@ var (
 				fmt.Println("Visiting", r.URL.String())
 			})
 
-			c.Visit(url)
+			if err := c.Visit(url); err != nil {
+				fmt.Println("Error visiting URL", err)
+			}
 		},
 	}
 
@@ -66,7 +68,10 @@ var (
 					count--
 				})
 
-				c.Visit(url)
+				if err := c.Visit(url); err != nil {
+					defer w.Done()
+					fmt.Println("Error visiting URL", err)
+				}
 			}
 
 			wg := sync.WaitGroup{}
